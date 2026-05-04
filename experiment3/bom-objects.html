@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 3 - BOM Objects</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+    }
+
+    .bom-section {
+      margin: 25px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-left: 5px solid #3498db;
+    }
+
+    .bom-section h2 {
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+
+    .info-box {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+
+    .info-box strong {
+      color: #2c3e50;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    #output {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      min-height: 50px;
+      border: 2px solid #ffc107;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🌐 Experiment 3: BOM Objects</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">
+      Browser Object Model - Window, History, Navigator, Screen
+    </p>
+
+    <!-- Window Object -->
+    <div class="bom-section">
+      <h2>1. Window Object</h2>
+      <p>The window object represents the browser window and is the global object in browser JavaScript.</p>
+
+      <div class="info-box" id="window-info">
+        <strong>Window Properties:</strong><br>
+        <span id="window-details"></span>
+      </div>
+
+      <div class="button-group">
+        <button onclick="showWindowInfo()">Show Window Info</button>
+        <button onclick="openNewWindow()">Open New Window</button>
+        <button onclick="showAlert()">Alert Dialog</button>
+        <button onclick="showConfirm()">Confirm Dialog</button>
+        <button onclick="showPrompt()">Prompt Dialog</button>
+        <button onclick="scrollToTop()">Scroll to Top</button>
+      </div>
+    </div>
+
+    <!-- History Object -->
+    <div class="bom-section">
+      <h2>2. History Object</h2>
+      <p>The history object contains the browser's history and allows navigation through it.</p>
+
+      <div class="info-box" id="history-info">
+        <strong>History Information:</strong><br>
+        <span id="history-details"></span>
+      </div>
+
+      <div class="button-group">
+        <button onclick="showHistoryInfo()">Show History Info</button>
+        <button onclick="goBack()">Go Back</button>
+        <button onclick="goForward()">Go Forward</button>
+      </div>
+    </div>
+
+    <!-- Navigator Object -->
+    <div class="bom-section">
+      <h2>3. Navigator Object</h2>
+      <p>The navigator object contains information about the browser and the user's system.</p>
+
+      <div class="info-box" id="navigator-info">
+        <strong>Browser & System Information:</strong><br>
+        <span id="navigator-details"></span>
+      </div>
+
+      <div class="button-group">
+        <button onclick="showNavigatorInfo()">Show Navigator Info</button>
+        <button onclick="checkOnlineStatus()">Check Online Status</button>
+        <button onclick="getGeolocation()">Get Location</button>
+      </div>
+    </div>
+
+    <!-- Screen Object -->
+    <div class="bom-section">
+      <h2>4. Screen Object</h2>
+      <p>The screen object contains information about the user's screen/display.</p>
+
+      <div class="info-box" id="screen-info">
+        <strong>Screen Information:</strong><br>
+        <span id="screen-details"></span>
+      </div>
+
+      <div class="button-group">
+        <button onclick="showScreenInfo()">Show Screen Info</button>
+      </div>
+    </div>
+
+    <!-- Output Area -->
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Window Object Functions
+    function showWindowInfo() {
+      const info = `
+                <strong>Window Dimensions:</strong><br>
+                • Inner Width: ${window.innerWidth}px<br>
+                • Inner Height: ${window.innerHeight}px<br>
+                • Outer Width: ${window.outerWidth}px<br>
+                • Outer Height: ${window.outerHeight}px<br><br>
+                <strong>Window Position:</strong><br>
+                • Screen X: ${window.screenX}px<br>
+                • Screen Y: ${window.screenY}px<br><br>
+                <strong>Other Properties:</strong><br>
+                • Location: ${window.location.href}<br>
+                • Protocol: ${window.location.protocol}<br>
+                • Hostname: ${window.location.hostname}
+            `;
+      document.getElementById('window-details').innerHTML = info;
+      showOutput('Window information displayed above');
+    }
+
+    function openNewWindow() {
+      const newWin = window.open('', '_blank', 'width=500,height=400');
+      newWin.document.write('<h1>New Window Opened!</h1><p>This window was opened using window.open()</p>');
+      showOutput('New window opened successfully');
+    }
+
+    function showAlert() {
+      window.alert('This is an Alert Dialog Box!');
+      showOutput('Alert dialog displayed');
+    }
+
+    function showConfirm() {
+      const result = window.confirm('Do you want to continue?');
+      showOutput(`Confirm dialog result: ${result ? 'OK clicked' : 'Cancel clicked'}`);
+    }
+
+    function showPrompt() {
+      const name = window.prompt('What is your name?', 'Arjun');
+      if (name) {
+        showOutput(`Prompt result: Hello, ${name}!`);
+      } else {
+        showOutput('Prompt was cancelled');
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showOutput('Scrolling to top...');
+    }
+
+    // History Object Functions
+    function showHistoryInfo() {
+      const info = `
+                <strong>History Object:</strong><br>
+                • Length: ${window.history.length} pages in history<br>
+                • Current URL: ${window.location.href}<br><br>
+                <em>Note: For security reasons, browsers limit access to history URLs</em>
+            `;
+      document.getElementById('history-details').innerHTML = info;
+      showOutput('History information displayed above');
+    }
+
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        showOutput('No previous page in history');
+      }
+    }
+
+    function goForward() {
+      window.history.forward();
+      showOutput('Attempting to go forward in history');
+    }
+
+    // Navigator Object Functions
+    function showNavigatorInfo() {
+      const info = `
+                <strong>Browser Information:</strong><br>
+                • App Name: ${navigator.appName}<br>
+                • App Version: ${navigator.appVersion}<br>
+                • User Agent: ${navigator.userAgent}<br>
+                • Platform: ${navigator.platform}<br>
+                • Language: ${navigator.language}<br>
+                • Online Status: ${navigator.onLine ? 'Online' : 'Offline'}<br>
+                • Cookies Enabled: ${navigator.cookieEnabled}<br>
+                • Java Enabled: ${navigator.javaEnabled()}<br>
+                • Hardware Concurrency: ${navigator.hardwareConcurrency} cores
+            `;
+      document.getElementById('navigator-details').innerHTML = info;
+      showOutput('Navigator information displayed above');
+    }
+
+    function checkOnlineStatus() {
+      const status = navigator.onLine ? 'You are ONLINE ✅' : 'You are OFFLINE ❌';
+      showOutput(status);
+    }
+
+    function getGeolocation() {
+      if (navigator.geolocation) {
+        showOutput('Requesting location permission...');
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const info = `
+                            <strong>Your Location:</strong><br>
+                            • Latitude: ${position.coords.latitude}<br>
+                            • Longitude: ${position.coords.longitude}<br>
+                            • Accuracy: ${position.coords.accuracy} meters
+                        `;
+            showOutput(info);
+          },
+          function (error) {
+            showOutput(`Geolocation error: ${error.message}`);
+          }
+        );
+      } else {
+        showOutput('Geolocation is not supported by this browser');
+      }
+    }
+
+    // Screen Object Functions
+    function showScreenInfo() {
+      const info = `
+                <strong>Screen Dimensions:</strong><br>
+                • Total Width: ${screen.width}px<br>
+                • Total Height: ${screen.height}px<br>
+                • Available Width: ${screen.availWidth}px<br>
+                • Available Height: ${screen.availHeight}px<br>
+                • Color Depth: ${screen.colorDepth} bits<br>
+                • Pixel Depth: ${screen.pixelDepth} bits<br>
+                • Orientation: ${screen.orientation ? screen.orientation.type : 'Not available'}
+            `;
+      document.getElementById('screen-details').innerHTML = info;
+      showOutput('Screen information displayed above');
+    }
+
+    // Utility function to show output
+    function showOutput(message) {
+      const output = document.getElementById('output');
+      const timestamp = new Date().toLocaleTimeString();
+      output.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+    }
+
+    // Initialize on page load
+    window.onload = function () {
+      showOutput('Page loaded successfully! Click buttons to explore BOM objects.');
+    };
+  </script>
+</body>
+
+</html>

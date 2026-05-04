@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 5 - Dynamic Web Pages with Events</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #f5576c;
+      margin-bottom: 15px;
+      font-size: 2.5em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin: 30px 0;
+      padding: 25px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border-left: 6px solid #f5576c;
+    }
+
+    .section h2 {
+      color: #f093fb;
+      margin-bottom: 15px;
+    }
+
+    .demo-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border: 2px solid #dee2e6;
+    }
+
+    button {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin: 8px 0;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #f5576c;
+    }
+
+    .event-box {
+      padding: 15px;
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      margin: 10px 0;
+      min-height: 50px;
+    }
+
+    .color-box {
+      width: 200px;
+      height: 200px;
+      border: 3px solid #333;
+      border-radius: 10px;
+      margin: 15px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .task-item {
+      background: #e9ecef;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .task-item:hover {
+      background: #dee2e6;
+      transform: translateX(5px);
+    }
+
+    .task-item.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .counter-display {
+      font-size: 48px;
+      text-align: center;
+      color: #f5576c;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .form-output {
+      background: #d4edda;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 2px solid #28a745;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>⚡ Experiment 5: Dynamic Web Pages</h1>
+    <p class="subtitle">JavaScript Events, Conditional Logic, Loops, and innerHTML</p>
+
+    <!-- Section 1: Mouse Events -->
+    <div class="section">
+      <h2>1. Mouse Events</h2>
+      <div class="demo-box">
+        <div class="color-box" id="mouse-box" onmouseover="handleMouseOver()" onmouseout="handleMouseOut()"
+          onclick="handleClick()" ondblclick="handleDoubleClick()">
+          Hover or Click Me!
+        </div>
+        <div class="event-box" id="mouse-output">Mouse events will appear here...</div>
+      </div>
+    </div>
+
+    <!-- Section 2: Keyboard Events -->
+    <div class="section">
+      <h2>2. Keyboard Events</h2>
+      <div class="demo-box">
+        <input type="text" id="keyboard-input" placeholder="Type something..." onkeydown="handleKeyDown(event)"
+          onkeyup="handleKeyUp(event)" onkeypress="handleKeyPress(event)">
+        <div class="event-box" id="keyboard-output">Keyboard events will appear here...</div>
+      </div>
+    </div>
+
+    <!-- Section 3: Form Events -->
+    <div class="section">
+      <h2>3. Form Events with Validation</h2>
+      <div class="demo-box">
+        <form id="demo-form" onsubmit="handleSubmit(event)">
+          <input type="text" id="username" placeholder="Username (min 3 characters)" onchange="validateUsername()"
+            onfocus="handleFocus(event)" onblur="handleBlur(event)">
+
+          <input type="email" id="email" placeholder="Email address" onchange="validateEmail()">
+
+          <textarea id="message" placeholder="Your message" rows="4"></textarea>
+
+          <button type="submit">Submit Form</button>
+          <button type="reset" onclick="handleReset()">Reset Form</button>
+        </form>
+        <div class="form-output" id="form-output" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Section 4: Dynamic Content with innerHTML -->
+    <div class="section">
+      <h2>4. Dynamic Content Generation (innerHTML)</h2>
+      <div class="demo-box">
+        <button onclick="generateTable()">Generate Table</button>
+        <button onclick="generateList()">Generate List</button>
+        <button onclick="generateCards()">Generate Cards</button>
+        <button onclick="clearContent()">Clear Content</button>
+        <div id="dynamic-content" style="margin-top: 20px;"></div>
+      </div>
+    </div>
+
+    <!-- Section 5: Conditional Logic & Loops -->
+    <div class="section">
+      <h2>5. Conditional Logic & Loops</h2>
+      <div class="demo-box">
+        <input type="number" id="number-input" placeholder="Enter a number" min="1" max="20">
+        <button onclick="checkEvenOdd()">Check Even/Odd</button>
+        <button onclick="generateMultiplicationTable()">Multiplication Table</button>
+        <button onclick="checkPrime()">Check Prime</button>
+        <div class="event-box" id="logic-output"></div>
+      </div>
+    </div>
+
+    <!-- Section 6: Interactive Counter -->
+    <div class="section">
+      <h2>6. Interactive Counter</h2>
+      <div class="demo-box">
+        <div class="counter-display" id="counter">0</div>
+        <button onclick="increment()">Increment (+1)</button>
+        <button onclick="decrement()">Decrement (-1)</button>
+        <button onclick="incrementBy(5)">Add 5</button>
+        <button onclick="resetCounter()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Section 7: To-Do List Application -->
+    <div class="section">
+      <h2>7. To-Do List Application</h2>
+      <div class="demo-box">
+        <input type="text" id="todo-input" placeholder="Enter a task..." onkeypress="handleTodoEnter(event)">
+        <button onclick="addTodo()">Add Task</button>
+        <button onclick="clearCompleted()">Clear Completed</button>
+        <div id="todo-list" style="margin-top: 20px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Section 1: Mouse Events
+    function handleMouseOver() {
+      const box = document.getElementById('mouse-box');
+      box.style.backgroundColor = '#f093fb';
+      box.style.color = 'white';
+      box.textContent = 'Mouse Over!';
+      updateOutput('mouse-output', 'Event: mouseover triggered');
+    }
+
+    function handleMouseOut() {
+      const box = document.getElementById('mouse-box');
+      box.style.backgroundColor = 'white';
+      box.style.color = 'black';
+      box.textContent = 'Hover or Click Me!';
+      updateOutput('mouse-output', 'Event: mouseout triggered');
+    }
+
+    function handleClick() {
+      const box = document.getElementById('mouse-box');
+      box.style.backgroundColor = '#f5576c';
+      box.style.color = 'white';
+      updateOutput('mouse-output', 'Event: click triggered');
+    }
+
+    function handleDoubleClick() {
+      const box = document.getElementById('mouse-box');
+      box.style.backgroundColor = '#28a745';
+      box.style.color = 'white';
+      box.textContent = 'Double Clicked!';
+      updateOutput('mouse-output', 'Event: dblclick triggered');
+    }
+
+    // Section 2: Keyboard Events
+    function handleKeyDown(event) {
+      updateOutput('keyboard-output', `Event: keydown - Key: "${event.key}" (Code: ${event.keyCode})`);
+    }
+
+    function handleKeyUp(event) {
+      const value = event.target.value;
+      updateOutput('keyboard-output', `Event: keyup - Current value: "${value}" (Length: ${value.length})`);
+    }
+
+    function handleKeyPress(event) {
+      updateOutput('keyboard-output', `Event: keypress - Character: "${event.key}"`);
+    }
+
+    // Section 3: Form Events
+    function handleFocus(event) {
+      event.target.style.backgroundColor = '#fff3cd';
+    }
+
+    function handleBlur(event) {
+      event.target.style.backgroundColor = 'white';
+    }
+
+    function validateUsername() {
+      const username = document.getElementById('username').value;
+      if (username.length < 3) {
+        alert('Username must be at least 3 characters long!');
+        return false;
+      }
+      return true;
+    }
+
+    function validateEmail() {
+      const email = document.getElementById('email').value;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address!');
+        return false;
+      }
+      return true;
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      if (!validateUsername() || !validateEmail()) {
+        return;
+      }
+
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const output = document.getElementById('form-output');
+      output.innerHTML = `
+                <strong>Form Submitted Successfully!</strong><br><br>
+                <strong>Username:</strong> ${username}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Message:</strong> ${message || 'No message provided'}
+            `;
+      output.style.display = 'block';
+    }
+
+    function handleReset() {
+      document.getElementById('form-output').style.display = 'none';
+    }
+
+    // Section 4: Dynamic Content with innerHTML
+    function generateTable() {
+      let html = '<table style="width: 100%; border-collapse: collapse;">';
+      html += '<tr style="background: #f093fb; color: white;">';
+      html += '<th style="padding: 10px; border: 1px solid #ddd;">ID</th>';
+      html += '<th style="padding: 10px; border: 1px solid #ddd;">Name</th>';
+      html += '<th style="padding: 10px; border: 1px solid #ddd;">Score</th></tr>';
+
+      for (let i = 1; i <= 5; i++) {
+        html += '<tr>';
+        html += `<td style="padding: 10px; border: 1px solid #ddd;">${i}</td>`;
+        html += `<td style="padding: 10px; border: 1px solid #ddd;">Student ${i}</td>`;
+        html += `<td style="padding: 10px; border: 1px solid #ddd;">${Math.floor(Math.random() * 100)}</td>`;
+        html += '</tr>';
+      }
+      html += '</table>';
+
+      document.getElementById('dynamic-content').innerHTML = html;
+    }
+
+    function generateList() {
+      let html = '<ul style="list-style: none; padding: 0;">';
+      const items = ['JavaScript', 'HTML', 'CSS', 'Node.js', 'React'];
+
+      for (let i = 0; i < items.length; i++) {
+        html += `<li style="padding: 10px; margin: 5px 0; background: #e9ecef; border-radius: 5px;">
+                    ${i + 1}. ${items[i]}
+                </li>`;
+      }
+      html += '</ul>';
+
+      document.getElementById('dynamic-content').innerHTML = html;
+    }
+
+    function generateCards() {
+      let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">';
+
+      for (let i = 1; i <= 6; i++) {
+        html += `
+                    <div style="padding: 20px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                                color: white; border-radius: 10px; text-align: center;">
+                        <h3>Card ${i}</h3>
+                        <p>Dynamic content generated using innerHTML</p>
+                    </div>
+                `;
+      }
+      html += '</div>';
+
+      document.getElementById('dynamic-content').innerHTML = html;
+    }
+
+    function clearContent() {
+      document.getElementById('dynamic-content').innerHTML = '';
+    }
+
+    // Section 5: Conditional Logic & Loops
+    function checkEvenOdd() {
+      const num = parseInt(document.getElementById('number-input').value);
+
+      if (isNaN(num)) {
+        updateOutput('logic-output', 'Please enter a valid number!');
+        return;
+      }
+
+      if (num % 2 === 0) {
+        updateOutput('logic-output', `${num} is an EVEN number`);
+      } else {
+        updateOutput('logic-output', `${num} is an ODD number`);
+      }
+    }
+
+    function generateMultiplicationTable() {
+      const num = parseInt(document.getElementById('number-input').value);
+
+      if (isNaN(num)) {
+        updateOutput('logic-output', 'Please enter a valid number!');
+        return;
+      }
+
+      let html = `<strong>Multiplication Table of ${num}:</strong><br><br>`;
+      for (let i = 1; i <= 10; i++) {
+        html += `${num} × ${i} = ${num * i}<br>`;
+      }
+
+      document.getElementById('logic-output').innerHTML = html;
+    }
+
+    function checkPrime() {
+      const num = parseInt(document.getElementById('number-input').value);
+
+      if (isNaN(num) || num < 2) {
+        updateOutput('logic-output', 'Please enter a number greater than 1!');
+        return;
+      }
+
+      let isPrime = true;
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+
+      if (isPrime) {
+        updateOutput('logic-output', `${num} is a PRIME number ✓`);
+      } else {
+        updateOutput('logic-output', `${num} is NOT a prime number ✗`);
+      }
+    }
+
+    // Section 6: Interactive Counter
+    let counter = 0;
+
+    function increment() {
+      counter++;
+      updateCounter();
+    }
+
+    function decrement() {
+      counter--;
+      updateCounter();
+    }
+
+    function incrementBy(value) {
+      counter += value;
+      updateCounter();
+    }
+
+    function resetCounter() {
+      counter = 0;
+      updateCounter();
+    }
+
+    function updateCounter() {
+      document.getElementById('counter').textContent = counter;
+    }
+
+    // Section 7: To-Do List
+    let todoId = 0;
+
+    function addTodo() {
+      const input = document.getElementById('todo-input');
+      const task = input.value.trim();
+
+      if (task === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      todoId++;
+      const todoList = document.getElementById('todo-list');
+      const taskDiv = document.createElement('div');
+      taskDiv.className = 'task-item';
+      taskDiv.id = `task-${todoId}`;
+      taskDiv.innerHTML = `
+                <span onclick="toggleComplete('task-${todoId}')" style="cursor: pointer; flex: 1;">${task}</span>
+                <button onclick="deleteTodo('task-${todoId}')">Delete</button>
+            `;
+
+      todoList.appendChild(taskDiv);
+      input.value = '';
+    }
+
+    function handleTodoEnter(event) {
+      if (event.key === 'Enter') {
+        addTodo();
+      }
+    }
+
+    function toggleComplete(taskId) {
+      const task = document.getElementById(taskId);
+      task.classList.toggle('completed');
+    }
+
+    function deleteTodo(taskId) {
+      const task = document.getElementById(taskId);
+      task.remove();
+    }
+
+    function clearCompleted() {
+      const completed = document.querySelectorAll('.task-item.completed');
+      completed.forEach(task => task.remove());
+    }
+
+    // Utility function
+    function updateOutput(elementId, message) {
+      document.getElementById(elementId).innerHTML = message;
+    }
+
+    // Initialize
+    window.onload = function () {
+      console.log('Dynamic Web Page loaded successfully!');
+    };
+  </script>
+</body>
+
+</html>

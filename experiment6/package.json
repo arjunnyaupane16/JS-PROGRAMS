@@ -1,0 +1,17 @@
+{
+  "name": "experiment6-nodejs",
+  "version": "1.0.0",
+  "description": "Node.js environment setup and execution demo",
+  "main": "basic-node.js",
+  "scripts": {
+    "start": "node basic-node.js",
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "callbacks"
+  ],
+  "author": "Arjun Nyaupane",
+  "license": "MIT"
+}

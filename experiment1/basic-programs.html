@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1 - Basic JavaScript Programs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .output {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Experiment 1: Basic JavaScript Programs</h1>
+        <p>Click buttons to see different JavaScript concepts in action:</p>
+
+        <button onclick="demonstrateVariables()">Variables & Data Types</button>
+        <button onclick="demonstrateOperators()">Operators</button>
+        <button onclick="demonstrateControlStatements()">Control Statements</button>
+        <button onclick="clearOutput()">Clear Output</button>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function displayOutput(title, content) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML += `<div class="output"><strong>${title}</strong><br>${content}</div>`;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+        }
+
+        // Variables and Data Types
+        function demonstrateVariables() {
+            let output = '';
+
+            // Different variable declarations
+            var oldWay = "var keyword (function-scoped)";
+            let modernWay = "let keyword (block-scoped)";
+            const constant = "const keyword (immutable)";
+
+            // Data types
+            let stringType = "Hello, JavaScript!";
+            let numberType = 42;
+            let booleanType = true;
+            let arrayType = [1, 2, 3, 4, 5];
+            let objectType = {name: "Arjun", age: 25};
+            let undefinedType;
+            let nullType = null;
+
+            output += `<strong>Variable Declarations:</strong><br>`;
+            output += `var: ${oldWay}<br>`;
+            output += `let: ${modernWay}<br>`;
+            output += `const: ${constant}<br><br>`;
+
+            output += `<strong>Data Types:</strong><br>`;
+            output += `String: ${stringType} (type: ${typeof stringType})<br>`;
+            output += `Number: ${numberType} (type: ${typeof numberType})<br>`;
+            output += `Boolean: ${booleanType} (type: ${typeof booleanType})<br>`;
+            output += `Array: [${arrayType}] (type: ${typeof arrayType})<br>`;
+            output += `Object: ${JSON.stringify(objectType)} (type: ${typeof objectType})<br>`;
+            output += `Undefined: ${undefinedType} (type: ${typeof undefinedType})<br>`;
+            output += `Null: ${nullType} (type: ${typeof nullType})<br>`;
+
+            displayOutput('Variables & Data Types', output);
+        }
+
+        // Operators
+        function demonstrateOperators() {
+            let output = '';
+            let a = 10, b = 5;
+
+            // Arithmetic Operators
+            output += `<strong>Arithmetic Operators (a=${a}, b=${b}):</strong><br>`;
+            output += `Addition: ${a} + ${b} = ${a + b}<br>`;
+            output += `Subtraction: ${a} - ${b} = ${a - b}<br>`;
+            output += `Multiplication: ${a} * ${b} = ${a * b}<br>`;
+            output += `Division: ${a} / ${b} = ${a / b}<br>`;
+            output += `Modulus: ${a} % ${b} = ${a % b}<br>`;
+            output += `Exponentiation: ${a} ** 2 = ${a ** 2}<br><br>`;
+
+            // Comparison Operators
+            output += `<strong>Comparison Operators:</strong><br>`;
+            output += `${a} == ${b}: ${a == b}<br>`;
+            output += `${a} === ${b}: ${a === b}<br>`;
+            output += `${a} != ${b}: ${a != b}<br>`;
+            output += `${a} > ${b}: ${a > b}<br>`;
+            output += `${a} < ${b}: ${a < b}<br><br>`;
+
+            // Logical Operators
+            let x = true, y = false;
+            output += `<strong>Logical Operators (x=${x}, y=${y}):</strong><br>`;
+            output += `x && y: ${x && y}<br>`;
+            output += `x || y: ${x || y}<br>`;
+            output += `!x: ${!x}<br>`;
+
+            displayOutput('Operators', output);
+        }
+
+        // Control Statements
+        function demonstrateControlStatements() {
+            let output = '';
+
+            // If-Else Statement
+            let age = 20;
+            output += `<strong>If-Else Statement:</strong><br>`;
+            output += `Age: ${age}<br>`;
+            if (age >= 18) {
+                output += `Result: You are an adult<br><br>`;
+            } else {
+                output += `Result: You are a minor<br><br>`;
+            }
+
+            // Switch Statement
+            let day = 3;
+            let dayName;
+            output += `<strong>Switch Statement:</strong><br>`;
+            output += `Day number: ${day}<br>`;
+            switch(day) {
+                case 1: dayName = "Monday"; break;
+                case 2: dayName = "Tuesday"; break;
+                case 3: dayName = "Wednesday"; break;
+                case 4: dayName = "Thursday"; break;
+                case 5: dayName = "Friday"; break;
+                default: dayName = "Weekend";
+            }
+            output += `Day name: ${dayName}<br><br>`;
+
+            // For Loop
+            output += `<strong>For Loop (1 to 5):</strong><br>`;
+            for(let i = 1; i <= 5; i++) {
+                output += `${i} `;
+            }
+            output += `<br><br>`;
+
+            // While Loop
+            output += `<strong>While Loop (countdown from 5):</strong><br>`;
+            let count = 5;
+            let whileOutput = '';
+            while(count > 0) {
+                whileOutput += `${count} `;
+                count--;
+            }
+            output += whileOutput + `<br><br>`;
+
+            // For...of Loop (Array)
+            output += `<strong>For...of Loop (Array):</strong><br>`;
+            let fruits = ['Apple', 'Banana', 'Orange'];
+            output += `Fruits: `;
+            for(let fruit of fruits) {
+                output += `${fruit} `;
+            }
+
+            displayOutput('Control Statements', output);
+        }
+
+        // Display welcome message on load
+        window.onload = function() {
+            displayOutput('Welcome!', 'This program demonstrates basic JavaScript concepts including variables, data types, operators, and control statements. Click the buttons above to see each demonstration.');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "experiment8-mongodb",
+  "version": "1.0.0",
+  "description": "MongoDB CRUD operations with Node.js",
+  "main": "mongodb-demo.js",
+  "scripts": {
+    "start": "node mongodb-demo.js",
+    "test": "node test-mongodb.js"
+  },
+  "keywords": [
+    "mongodb",
+    "nodejs",
+    "crud",
+    "database"
+  ],
+  "author": "Arjun Nyaupane",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}

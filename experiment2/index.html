@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 2 - JavaScript with HTML</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      color: #667eea;
+      text-align: center;
+    }
+
+    .section {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .section h3 {
+      color: #764ba2;
+      margin-top: 0;
+    }
+
+    code {
+      background: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .demo-box {
+      background: #fff;
+      padding: 15px;
+      border: 2px solid #667eea;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+  </style>
+
+  <!-- Internal JavaScript -->
+  <script>
+    // This is internal JavaScript
+    console.log("Internal JavaScript loaded!");
+
+    function internalFunction() {
+      alert("This function is defined in internal JavaScript!");
+    }
+
+    /*
+     * Multi-line comment example
+     * This demonstrates proper commenting in JavaScript
+     */
+    function showCommentTypes() {
+      // Single-line comment
+      let message = "JavaScript supports single-line (//) and multi-line (/* */) comments";
+      document.getElementById('comment-demo').innerHTML = message;
+    }
+
+    // JavaScript Keywords demonstration
+    function demonstrateKeywords() {
+      let output = '<strong>JavaScript Keywords in Action:</strong><br><br>';
+
+      // var, let, const
+      var oldVariable = "var keyword";
+      let newVariable = "let keyword";
+      const constantValue = "const keyword";
+
+      output += `<code>var</code>: ${oldVariable}<br>`;
+      output += `<code>let</code>: ${newVariable}<br>`;
+      output += `<code>const</code>: ${constantValue}<br><br>`;
+
+      // if, else
+      let condition = true;
+      output += `<code>if-else</code>: `;
+      if (condition) {
+        output += "Condition is true<br>";
+      } else {
+        output += "Condition is false<br>";
+      }
+
+      // for loop
+      output += `<code>for</code> loop: `;
+      for (let i = 1; i <= 3; i++) {
+        output += `${i} `;
+      }
+      output += `<br>`;
+
+      // function keyword
+      output += `<code>function</code>: Defined and executed<br>`;
+
+      // return keyword
+      function getSum(a, b) {
+        return a + b; // return keyword
+      }
+      output += `<code>return</code>: Sum of 5 + 3 = ${getSum(5, 3)}<br>`;
+
+      // this keyword
+      output += `<code>this</code>: Refers to ${typeof this}<br>`;
+
+      // new keyword
+      let date = new Date();
+      output += `<code>new</code>: Created new Date object<br>`;
+
+      // typeof keyword
+      output += `<code>typeof</code>: typeof "hello" = ${typeof "hello"}<br>`;
+
+      document.getElementById('keywords-demo').innerHTML = output;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Experiment 2: Embedding & Linking JavaScript with HTML</h1>
+
+    <!-- Section 1: Internal JavaScript -->
+    <div class="section">
+      <h3>1. Internal JavaScript (in &lt;head&gt; section)</h3>
+      <p>JavaScript code written inside <code>&lt;script&gt;</code> tags in the HTML document.</p>
+      <div class="demo-box">
+        <button onclick="internalFunction()"
+          style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Click to Test Internal JavaScript
+        </button>
+      </div>
+    </div>
+
+    <!-- Section 2: Inline JavaScript -->
+    <div class="section">
+      <h3>2. Inline JavaScript (in HTML elements)</h3>
+      <p>JavaScript code written directly in HTML element attributes.</p>
+      <div class="demo-box">
+        <button onclick="alert('This is inline JavaScript!')"
+          style="padding: 10px 20px; background: #764ba2; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Click to Test Inline JavaScript
+        </button>
+      </div>
+    </div>
+
+    <!-- Section 3: External JavaScript -->
+    <div class="section">
+      <h3>3. External JavaScript (linked file)</h3>
+      <p>JavaScript code written in a separate .js file and linked using <code>&lt;script src="..."&gt;</code>.</p>
+      <div class="demo-box">
+        <button onclick="externalFunction()"
+          style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Click to Test External JavaScript
+        </button>
+      </div>
+    </div>
+
+    <!-- Section 4: Comments -->
+    <div class="section">
+      <h3>4. JavaScript Comments</h3>
+      <p>Demonstrating single-line and multi-line comments.</p>
+      <div class="demo-box">
+        <button onclick="showCommentTypes()"
+          style="padding: 10px 20px; background: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer;">
+          Show Comment Types
+        </button>
+        <div id="comment-demo" style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 5px;"></div>
+      </div>
+    </div>
+
+    <!-- Section 5: Keywords -->
+    <div class="section">
+      <h3>5. JavaScript Keywords</h3>
+      <p>Demonstrating various JavaScript keywords like var, let, const, if, else, for, function, return, etc.</p>
+      <div class="demo-box">
+        <button onclick="demonstrateKeywords()"
+          style="padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Demonstrate Keywords
+        </button>
+        <div id="keywords-demo" style="margin-top: 10px; padding: 10px; background: #f8d7da; border-radius: 5px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External JavaScript file -->
+  <script src="external.js"></script>
+
+  <!-- Script at the end of body -->
+  <script>
+    console.log("Script at the end of body loaded!");
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("DOM fully loaded and parsed");
+    });
+  </script>
+</body>
+
+</html>

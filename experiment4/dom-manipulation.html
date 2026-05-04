@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 4 - DOM Manipulation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin: 25px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-left: 5px solid #667eea;
+    }
+
+    .section h2 {
+      color: #764ba2;
+      margin-bottom: 15px;
+    }
+
+    .demo-area {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 2px dashed #dee2e6;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    input,
+    select {
+      padding: 8px 12px;
+      border: 2px solid #dee2e6;
+      border-radius: 5px;
+      margin: 5px;
+      font-size: 14px;
+    }
+
+    .highlight {
+      background-color: yellow;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    .item {
+      padding: 10px;
+      margin: 5px 0;
+      background: #e9ecef;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item button {
+      background: #dc3545;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    #demo-box {
+      padding: 20px;
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    .code-display {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🎯 Experiment 4: DOM Manipulation</h1>
+    <p class="subtitle">getElementById, getElementsByClassName, getElementsByName, getElementsByTagName</p>
+
+    <!-- Section 1: getElementById -->
+    <div class="section">
+      <h2>1. getElementById()</h2>
+      <p>Selects a single element by its unique ID attribute.</p>
+
+      <div class="demo-area">
+        <div id="demo-box">
+          <p id="unique-paragraph">This is a paragraph with ID "unique-paragraph"</p>
+        </div>
+
+        <button onclick="changeById()">Change Text</button>
+        <button onclick="changeStyleById()">Change Style</button>
+        <button onclick="hideById()">Hide Element</button>
+        <button onclick="showById()">Show Element</button>
+      </div>
+
+      <div class="code-display">
+        document.getElementById('unique-paragraph')
+      </div>
+    </div>
+
+    <!-- Section 2: getElementsByClassName -->
+    <div class="section">
+      <h2>2. getElementsByClassName()</h2>
+      <p>Selects all elements with a specific class name (returns HTMLCollection).</p>
+
+      <div class="demo-area">
+        <div class="highlight-item">Item 1 with class "highlight-item"</div>
+        <div class="highlight-item">Item 2 with class "highlight-item"</div>
+        <div class="highlight-item">Item 3 with class "highlight-item"</div>
+        <div class="highlight-item">Item 4 with class "highlight-item"</div>
+
+        <br><br>
+        <button onclick="highlightByClass()">Highlight All</button>
+        <button onclick="changeTextByClass()">Change All Text</button>
+        <button onclick="countByClass()">Count Elements</button>
+        <button onclick="resetByClass()">Reset</button>
+      </div>
+
+      <div class="code-display">
+        document.getElementsByClassName('highlight-item')
+      </div>
+    </div>
+
+    <!-- Section 3: getElementsByName -->
+    <div class="section">
+      <h2>3. getElementsByName()</h2>
+      <p>Selects all elements with a specific name attribute (commonly used with form elements).</p>
+
+      <div class="demo-area">
+        <form id="demo-form">
+          <label><input type="radio" name="color" value="red"> Red</label><br>
+          <label><input type="radio" name="color" value="green"> Green</label><br>
+          <label><input type="radio" name="color" value="blue"> Blue</label><br>
+          <label><input type="radio" name="color" value="yellow"> Yellow</label><br>
+          <br>
+          <div id="color-display"
+            style="width: 100px; height: 100px; border: 2px solid #333; border-radius: 8px; background: white;"></div>
+        </form>
+
+        <br>
+        <button onclick="getSelectedByName()">Get Selected Color</button>
+        <button onclick="selectAllByName()">Select All</button>
+        <button onclick="clearByName()">Clear Selection</button>
+      </div>
+
+      <div class="code-display">
+        document.getElementsByName('color')
+      </div>
+    </div>
+
+    <!-- Section 4: getElementsByTagName -->
+    <div class="section">
+      <h2>4. getElementsByTagName()</h2>
+      <p>Selects all elements with a specific tag name (returns HTMLCollection).</p>
+
+      <div class="demo-area" id="tag-demo-area">
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+        <p>Paragraph 3</p>
+        <div>This is a div element</div>
+        <span>This is a span element</span>
+
+        <br><br>
+        <button onclick="highlightByTag('p')">Highlight Paragraphs</button>
+        <button onclick="countByTag('p')">Count Paragraphs</button>
+        <button onclick="changeByTag()">Change All Paragraphs</button>
+        <button onclick="resetByTag()">Reset</button>
+      </div>
+
+      <div class="code-display">
+        document.getElementsByTagName('p')
+      </div>
+    </div>
+
+    <!-- Section 5: Dynamic List Management -->
+    <div class="section">
+      <h2>5. Dynamic List Management (Combined Methods)</h2>
+      <p>Add, remove, and manipulate list items dynamically.</p>
+
+      <div class="demo-area">
+        <input type="text" id="item-input" placeholder="Enter item name">
+        <button onclick="addItem()">Add Item</button>
+        <button onclick="clearAllItems()">Clear All</button>
+
+        <div id="item-list" style="margin-top: 15px;"></div>
+      </div>
+    </div>
+
+    <!-- Output Area -->
+    <div id="output"
+      style="background: #d4edda; padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid #28a745; display: none;">
+      <strong>Output:</strong> <span id="output-text"></span>
+    </div>
+  </div>
+
+  <script>
+    // Utility function to show output
+    function showOutput(message) {
+      const output = document.getElementById('output');
+      const outputText = document.getElementById('output-text');
+      outputText.textContent = message;
+      output.style.display = 'block';
+      setTimeout(() => {
+        output.style.display = 'none';
+      }, 3000);
+    }
+
+    // 1. getElementById() functions
+    function changeById() {
+      const element = document.getElementById('unique-paragraph');
+      element.textContent = 'Text changed using getElementById()!';
+      showOutput('Text changed successfully');
+    }
+
+    function changeStyleById() {
+      const element = document.getElementById('unique-paragraph');
+      element.style.color = 'red';
+      element.style.fontSize = '20px';
+      element.style.fontWeight = 'bold';
+      showOutput('Style changed using getElementById()');
+    }
+
+    function hideById() {
+      const element = document.getElementById('unique-paragraph');
+      element.style.display = 'none';
+      showOutput('Element hidden');
+    }
+
+    function showById() {
+      const element = document.getElementById('unique-paragraph');
+      element.style.display = 'block';
+      showOutput('Element shown');
+    }
+
+    // 2. getElementsByClassName() functions
+    function highlightByClass() {
+      const elements = document.getElementsByClassName('highlight-item');
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].style.backgroundColor = '#ffeb3b';
+        elements[i].style.padding = '10px';
+        elements[i].style.borderRadius = '5px';
+        elements[i].style.margin = '5px 0';
+      }
+      showOutput(`Highlighted ${elements.length} elements using getElementsByClassName()`);
+    }
+
+    function changeTextByClass() {
+      const elements = document.getElementsByClassName('highlight-item');
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].textContent = `Modified Item ${i + 1}`;
+      }
+      showOutput('All elements text changed');
+    }
+
+    function countByClass() {
+      const elements = document.getElementsByClassName('highlight-item');
+      showOutput(`Found ${elements.length} elements with class "highlight-item"`);
+    }
+
+    function resetByClass() {
+      const elements = document.getElementsByClassName('highlight-item');
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].style.backgroundColor = '';
+        elements[i].textContent = `Item ${i + 1} with class "highlight-item"`;
+      }
+      showOutput('Reset all elements');
+    }
+
+    // 3. getElementsByName() functions
+    function getSelectedByName() {
+      const radios = document.getElementsByName('color');
+      let selected = null;
+
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          selected = radios[i].value;
+          break;
+        }
+      }
+
+      if (selected) {
+        document.getElementById('color-display').style.backgroundColor = selected;
+        showOutput(`Selected color: ${selected}`);
+      } else {
+        showOutput('No color selected');
+      }
+    }
+
+    function selectAllByName() {
+      const radios = document.getElementsByName('color');
+      if (radios.length > 0) {
+        radios[0].checked = true;
+        getSelectedByName();
+      }
+    }
+
+    function clearByName() {
+      const radios = document.getElementsByName('color');
+      for (let i = 0; i < radios.length; i++) {
+        radios[i].checked = false;
+      }
+      document.getElementById('color-display').style.backgroundColor = 'white';
+      showOutput('Selection cleared');
+    }
+
+    // 4. getElementsByTagName() functions
+    function highlightByTag(tagName) {
+      const demoArea = document.getElementById('tag-demo-area');
+      const elements = demoArea.getElementsByTagName(tagName);
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].style.backgroundColor = '#4CAF50';
+        elements[i].style.color = 'white';
+        elements[i].style.padding = '10px';
+        elements[i].style.borderRadius = '5px';
+      }
+      showOutput(`Highlighted ${elements.length} <${tagName}> elements`);
+    }
+
+    function countByTag(tagName) {
+      const demoArea = document.getElementById('tag-demo-area');
+      const elements = demoArea.getElementsByTagName(tagName);
+      showOutput(`Found ${elements.length} <${tagName}> elements`);
+    }
+
+    function changeByTag() {
+      const demoArea = document.getElementById('tag-demo-area');
+      const elements = demoArea.getElementsByTagName('p');
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].textContent = `Modified Paragraph ${i + 1}`;
+      }
+      showOutput('All paragraphs modified');
+    }
+
+    function resetByTag() {
+      const demoArea = document.getElementById('tag-demo-area');
+      const elements = demoArea.getElementsByTagName('p');
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].style.backgroundColor = '';
+        elements[i].style.color = '';
+        elements[i].style.padding = '';
+        elements[i].textContent = `Paragraph ${i + 1}`;
+      }
+      showOutput('Reset all paragraphs');
+    }
+
+    // 5. Dynamic List Management
+    let itemCounter = 0;
+
+    function addItem() {
+      const input = document.getElementById('item-input');
+      const itemName = input.value.trim();
+
+      if (itemName === '') {
+        showOutput('Please enter an item name');
+        return;
+      }
+
+      itemCounter++;
+      const itemList = document.getElementById('item-list');
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
+      itemDiv.id = `item-${itemCounter}`;
+      itemDiv.innerHTML = `
+                <span>${itemName}</span>
+                <button onclick="removeItem('item-${itemCounter}')">Remove</button>
+            `;
+
+      itemList.appendChild(itemDiv);
+      input.value = '';
+      showOutput(`Item "${itemName}" added`);
+    }
+
+    function removeItem(itemId) {
+      const item = document.getElementById(itemId);
+      item.remove();
+      showOutput('Item removed');
+    }
+
+    function clearAllItems() {
+      const itemList = document.getElementById('item-list');
+      itemList.innerHTML = '';
+      itemCounter = 0;
+      showOutput('All items cleared');
+    }
+
+    // Initialize
+    window.onload = function () {
+      showOutput('DOM Manipulation demo loaded! Try the buttons above.');
+    };
+  </script>
+</body>
+
+</html>

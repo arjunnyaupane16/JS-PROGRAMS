@@ -1,0 +1,24 @@
+{
+  "name": "experiment7-express-api",
+  "version": "1.0.0",
+  "description": "Node.js and Express RESTful API server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api"
+  ],
+  "author": "Arjun Nyaupane",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
